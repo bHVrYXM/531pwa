@@ -19,7 +19,8 @@ npm run dev        # opens a local preview; try it in your browser
 
 ## Releasing
 
-Source lives in a **private** GitHub repo (`origin`); the public Pages repo only gets built files.
+Source and the live site share one public repo. Pushing to `main` triggers a GitHub Action
+(`.github/workflows/deploy.yml`) that builds the app and publishes it to GitHub Pages.
 
 ```bash
 ./deploy.sh          # patch release, e.g. 1.1.0 -> 1.1.1
@@ -27,9 +28,9 @@ Source lives in a **private** GitHub repo (`origin`); the public Pages repo only
 ./deploy.sh major
 ```
 
-This bumps the version, commits + tags the source (`vX.Y.Z`), pushes it to `origin`, then builds and publishes to
-`https://github.com/bHVrYXM/531pwa`. The version is shown at the bottom of the app.
-Roll back by checking out an old tag and deploying again.
+This bumps the version, commits + tags (`vX.Y.Z`) and pushes. The live site updates about a minute later at
+`https://bhvrywm.github.io/531pwa/`. The version is shown at the bottom of the app.
+Roll back by checking out an old tag, then re-running the workflow from that code (or `git revert`).
 
 ## Install on iPhone
 
@@ -40,4 +41,4 @@ Open the link in **Safari** → Share button → **Add to Home Screen**.
 
 - Data lives in the home-screen app's own storage. **Deleting the app from the home screen deletes the data** — keep backups.
 - If you change `REMIND_AFTER_DAYS` in `src/storage.js`, you can make the reminder more or less frequent.
-- The built JavaScript in the public repo is minified but readable by anyone determined. It contains no personal data.
+- The repo is public, including the source. It contains no personal data — that lives only on your phone.
